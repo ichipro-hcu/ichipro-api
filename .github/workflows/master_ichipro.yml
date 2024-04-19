@@ -59,7 +59,7 @@ jobs:
         with:
           app-name: "ichipro"
           slot-name: "production"
-          publish-profile: ${{ AZUREAPPSERVICE_PUBLISHPROFILE_48B679C6C59145D180FECB3B9EB0FB36 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48B679C6C59145D180FECB3B9EB0FB36 }}
           images: "ghcr.io/${{ env.REPO }}:${{ github.sha }}"
 
       # - name: Deploy to Azure Web App
