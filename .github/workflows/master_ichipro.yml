@@ -52,10 +52,19 @@ jobs:
       - name: Lowercase the repo name
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
-      - name: Deploy to Azure Web App
+      - name: "Deploy to Azure Web App"
+        uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
         with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          app-name: "ichipro"
+          slot-name: "production"
+          publish-profile: ${{ AZUREAPPSERVICE_PUBLISHPROFILE_48B679C6C59145D180FECB3B9EB0FB36 }}
           images: "ghcr.io/${{ env.REPO }}:${{ github.sha }}"
+
+      # - name: Deploy to Azure Web App
+      #   id: deploy-to-webapp
+      #   uses: azure/webapps-deploy@85270a1854658d167ab239bce43949edb336fa7c
+      #   with:
+      #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
+      #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+      #     images: "ghcr.io/${{ env.REPO }}:${{ github.sha }}"
