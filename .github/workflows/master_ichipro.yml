@@ -4,6 +4,7 @@ env:
   AZURE_WEBAPP_NAME: ichipro # set this to your application's name
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
