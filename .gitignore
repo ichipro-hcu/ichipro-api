@@ -12,3 +12,4 @@ wheels/
 temp
 
 **/.env
+**/__pycache__/** 
