@@ -20,8 +20,8 @@ managed = true
 dev-dependencies = []
 
 [tool.rye.scripts]
-dev = { cmd = "python3 src/ichipro_api/main.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "db", database = "ichipro-dev" } }
-dev_init = { cmd = "python3 src/ichipro_api/db.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "db", database = "ichipro-dev" } }
+dev = { cmd = "python3 src/ichipro_api/main.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "localhost", database = "ichipro-dev" } }
+dev_init = { cmd = "python3 src/ichipro_api/db/migrate.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "localhost", database = "ichipro-dev" } }
 
 [tool.hatch.metadata]
 allow-direct-references = true
