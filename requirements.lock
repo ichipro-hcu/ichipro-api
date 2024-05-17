@@ -69,6 +69,7 @@ python-dotenv==1.0.1
     # via uvicorn
 python-multipart==0.0.9
     # via fastapi
+    # via ichipro-api
 pyyaml==6.0.1
     # via fastapi
     # via uvicorn
