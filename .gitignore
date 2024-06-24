@@ -8,3 +8,8 @@ wheels/
 
 # venv
 .venv
+
+temp
+
+**/.env
+**/__pycache__/** 
