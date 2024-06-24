@@ -11,6 +11,7 @@ dependencies = [
     "ulid>=1.1",
     "sqlalchemy-migrate>=0.13.0",
     "python-multipart>=0.0.9",
+    "requests>=2.32.3",
 ]
 readme = "README.md"
 requires-python = ">= 3.10"
@@ -24,8 +25,9 @@ managed = true
 dev-dependencies = []
 
 [tool.rye.scripts]
-dev = { cmd = "python3 src/ichipro_api/main.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "localhost", database = "ichipro-dev" } }
-dev_init = { cmd = "python3 src/ichipro_api/db/migrate.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "localhost", database = "ichipro-dev" } }
+dev = { cmd = "python3 src/ichipro_api/main.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "localhost", port = "5433", database = "ichipro-dev" } }
+dev_init = { cmd = "python3 src/ichipro_api/db/migrate.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "localhost", port = "5433", database = "ichipro-dev" } }
+dev_syl = { cmd = "python3 src/ichipro_api/db/syllabus.py", env = { db_dialect = "postgresql", username = "postgres", password = "password", host = "localhost", port = "5433", database = "ichipro-dev" } }
 
 [tool.hatch.metadata]
 allow-direct-references = true
