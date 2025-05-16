@@ -9,6 +9,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/netip"
 	"os"
 	"time"
 
@@ -517,6 +518,34 @@ func deleteUserHandler(c *fiber.Ctx) error {
 	)
 }
 
+func getAccessfromHandler(c *fiber.Ctx) error {
+	clientIPAddress, err := netip.ParseAddr(c.Get("X-Forwarded-For"))
+	if err != nil {
+		errMsg := "Failed to parse client IP Address"
+		return c.JSON(
+			IsSuccessResponse{
+				Success: false,
+				Message: &errMsg,
+			},
+		)
+	}
+	is_from_university := false
+	prefixv4, _ := netip.ParsePrefix("165.242.0.0/16")
+	prefixv6, _ := netip.ParsePrefix("2001:02f8:01c2::/48")
+	if prefixv4.Contains(clientIPAddress) || prefixv6.Contains(clientIPAddress) {
+		is_from_university = true
+	}
+	return c.JSON(
+		IsSuccessResponse{
+			Success: true,
+			Result: map[string]interface{}{
+				"your_ip":            clientIPAddress,
+				"is_from_university": &is_from_university,
+			},
+		},
+	)
+}
+
 // # Application
 func main() {
 	// # Initializations
@@ -566,6 +595,10 @@ func main() {
 	// ### User Information
 	user.Get("/me", getUserHandler)
 	user.Delete("/me", deleteUserHandler)
+
+	// ## Attend Scopes
+	attend := v1.Group("/attend")
+	attend.Get("/me", getAccessfromHandler)
 
 	app.Listen(":3000")
 }
